@@ -57,3 +57,22 @@ class Cart(object):
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['quantity']
             yield item
+
+    def __len__(self):
+        """
+        Liczba wszystkich elementów w koszyku.
+        """
+        return sum(item['quantity'] for item in self.cart.values())
+
+    def get_total_price(self):
+        """
+        Wartosc calkowita wszystkich elementow w koszyku
+        """
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
+    def clear(self):
+        """
+        Usuniecie koszyka na zakupy z sesji
+        """
+        del self.session[settings.CART_SESSION_ID]
+        self.save()
