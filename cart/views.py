@@ -18,3 +18,8 @@ def cart_add(request, product_id):
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
     return redirect('cart:cart_detail')
+
+@require_POST
+def cart_remove(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404
