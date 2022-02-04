@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+import braintree
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +142,17 @@ CART_SESSION_ID = 'cart'
 # mails on local console
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# Braintree settings
+# https://www.braintreepayments.com/sandbox
+BRAINTREE_MERCHANT_ID = config('BRAINTREE_MERCHANT_ID')
+BRAINTREE_PUBLIC_KEY = config('BRAINTREE_PUBLIC_KEY')
+BRAINTREE_PRIVATE_KEY = config('BRAINTREE_PRIVATE_KEY')
+
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
