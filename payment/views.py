@@ -17,7 +17,7 @@ def payment_process(request):
         # pobranie tokena nonce
         nonce = request.POST.get('payment_method_nonce', None)
         # utworzenie i przeslanie transakcji
-        result = braintree.Transaction.sale({
+        result = gateway.transaction.sale({
             'amount': '{:.2f}'.format(order.get_total_cost()),
             'payment_method_nonce': nonce,
             'options': {
