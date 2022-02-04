@@ -35,7 +35,7 @@ def payment_process(request):
             return redirect('payment:canceled')
     else:
         # wygenerowanie tokenu
-        client_token = braintree.ClientToken.generate()
+        client_token = gateway.client_token.generate()
         return render(request,
                       'payment/process.html',
                       {'order': order,
