@@ -8,4 +8,3 @@ media
 *.crt
 *.key
 *.code-workspace
-static/admin

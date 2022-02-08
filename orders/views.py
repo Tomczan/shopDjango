@@ -48,7 +48,7 @@ def admin_order_detail(request, order_id):
 
 
 @staff_member_required
-def adrmin_order_pdf(request, order_id):
+def admin_order_pdf(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     html = render_to_string('orders/order/pdf.html',
                             {'order': order})
@@ -56,6 +56,5 @@ def adrmin_order_pdf(request, order_id):
     response['Content-Disposition'] = f'filename=order_{order.id}.pdf'
     weasyprint.HTML(string=html).write_pdf(response,
                                            stylesheets=[weasyprint.CSS(
-                                               settings.STATIC_ROOT + 'css/pdf.css'
-                                           )])
+                                               settings.STATIC_ROOT + 'css/pdf.css')])
     return response
