@@ -37,7 +37,12 @@
                 {% csrf_token %}
               </form>
             </td>
-            <td><a href="{% url 'cart:cart_remove' product.id %}">Usun</a></td>
+            <td>
+              <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+                <input type="submit" value="Usun">
+                {% csrf_token %}
+              </form>
+            </td>
             <td class="num">{{ item.price }} zł</td>
             <td class="num">{{ item.total_price }} zł</td>
           </tr>
