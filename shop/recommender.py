@@ -25,6 +25,8 @@ class Recommender(object):
 
     def suggest_products_for(self, products, max_results=6):
         product_ids = [p.id for p in products]
+        if len(products) == 0:
+            return []
         if len(products) == 1:
             # tylko 1 produkt
             suggestions = r.zrange(
