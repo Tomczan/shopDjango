@@ -20,8 +20,8 @@ class Recommender(object):
                 # pobranie innych produktow kupionych razem z analizowanym
                 if product_id != with_id:
                     r.zincrby(self.get_product_key(product_id),
-                              with_id,
-                              amount=1)
+                              1,
+                              with_id)
 
     def suggest_products_for(self, products, max_results=6):
         product_ids = [p.id for p in products]
